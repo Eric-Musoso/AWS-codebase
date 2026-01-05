@@ -1,25 +1,31 @@
 #!/usr/bin/env bash
-
+# Exit immediately if a command exits with a non-zero status
+set -e
 
 # Where to store these files
-output_dir="/temp/s3-bash-scripts"
+OUTPUT_DIR="/tmp/s3-bash-scripts"
 
-# Output folder
-mkdir -p "$output_dir"
+# Remove output directory if it exists (use -rf to avoid error if it doesn't exist)
+rm -rf "$OUTPUT_DIR"
+
+# Create output folder
+mkdir -p "$OUTPUT_DIR"
 
 # Generate a random number between 5 and 10
-num_files=$((RANDOM % 6 + 5))
+NUM_FILES=$((RANDOM % 6 + 5))
 
-echo "Creating $num_files random files..."
+echo "Creating $NUM_FILES random files..."
 
-for ((i=1; i<=$num_files; i++)); do
+for ((i=1; i<=$NUM_FILES; i++)); do
     # Generate a random filename
-    random_filename="$output_dir/file_$i.txt"
+    FILENAME="$OUTPUT_DIR/file_$i.txt"
 
     # Generate random data and write it to the file
-    dd if=/dev/urandom of="$random_filename" bs=1024 count=$((RANDOM % 1024 + 1)) 2>/dev/null
+    dd if=/dev/urandom of="$FILENAME" bs=1024 count=$((RANDOM % 1024 + 1)) 2>/dev/null
 
-    echo "Created $random_filename"
+    echo "Created $FILENAME"
 done
 
 echo "Done."
+
+tree "$OUTPUT_DIR"
