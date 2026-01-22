@@ -1,2 +1,2 @@
 # AWS-codebase
-This repo contains syntax codes used to set-up AWS CLI and configure AWS-CLI-AUTO-Prompt via codespace git cloud code editor
+This repo contains codes that can be used as guide for anyone who migh want to prepare AWS Solutions Architecture Associate Exam
